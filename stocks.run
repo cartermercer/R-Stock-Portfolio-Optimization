@@ -1,0 +1,38 @@
+reset;
+
+model stocks.mod;
+data stocks.dat;
+
+
+for{t in 0.0003..0.003 by 0.0001} {
+
+	let RiskLevel := t;
+	solve;
+	
+	printf "%.10f\t%.10f\t", Variance, ExpReturn > "report.txt";
+	printf "\n" > "report.txt";
+	
+	for {j in STOCKS} {
+		printf "%.5f\t", W[j] > "weights.txt";
+		printf "\t" > "weights.txt";
+	}
+	
+	printf "\n" > "weights.txt";
+}
+
+close "report.txt";
+close "weights.txt";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
